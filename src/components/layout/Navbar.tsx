@@ -27,6 +27,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Link from "next/link";
+import { ModeToggle } from "./ModeToggle";
 
 interface MenuItem {
   title: string;
@@ -108,6 +109,7 @@ const Navbar = ({
             </div>
           </div>
           <div className="flex gap-2">
+            <ModeToggle></ModeToggle>
             <Button asChild variant="outline" size="sm">
               <Link href={auth.login.url}>{auth.login.title}</Link>
             </Button>
@@ -116,6 +118,8 @@ const Navbar = ({
             </Button>
           </div>
         </nav>
+
+
 
         {/* Mobile Menu */}
         <div className="block lg:hidden">
@@ -129,14 +133,21 @@ const Navbar = ({
               />
             </Link>
             <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="outline" size="icon">
-                  <Menu className="size-4" />
-                </Button>
-              </SheetTrigger>
+              <div className="flex items-center gap-2">
+                {/* Theme toggler for mobile menu */}
+                <div className="flex items-center justify-between lg:hidden">
+                  <ModeToggle></ModeToggle>
+                </div>
+                <SheetTrigger asChild>
+                  <Button variant="outline" size="icon">
+                    <Menu className="size-4" />
+                  </Button>
+                </SheetTrigger>
+              </div>
               <SheetContent className="overflow-y-auto">
                 <SheetHeader>
                   <SheetTitle>
+
                     <Link href={logo.url} className="flex items-center gap-2">
                       <img
                         src={logo.src}
@@ -144,6 +155,7 @@ const Navbar = ({
                         alt={logo.alt}
                       />
                     </Link>
+                    <ModeToggle></ModeToggle>
                   </SheetTitle>
                 </SheetHeader>
                 <div className="flex flex-col gap-6 p-4">
