@@ -1,7 +1,11 @@
 import { Button } from '@/components/ui/button';
+import { authClient } from '@/lib/auth-client';
 import React from 'react';
 
-const page = () => {
+const Home = async () => {
+    const session = await authClient.getSession();
+
+    console.log('Session:', session);
     return (
         <div>
             <Button>Test Button</Button>
@@ -9,4 +13,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Home;
