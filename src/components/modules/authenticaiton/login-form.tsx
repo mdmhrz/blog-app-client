@@ -26,9 +26,13 @@ export function LoginForm({
 
     const data = await authClient.signIn.social({
       provider: "google",
+      callbackURL: "http://localhost:3000",
     })
     console.log("Google login response:", data);
   }
+
+  const session = authClient.useSession();
+  console.log("Current session:", session);
 
 
 
