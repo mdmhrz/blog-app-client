@@ -20,40 +20,30 @@ import {
 import { Button } from "../ui/button"
 import Image from "next/image"
 import Link from "next/link"
-
-// This is sample data.
-const data = {
-  navMain: [
-    {
-      title: "Getting Started",
-      url: "",
-      items: [
-        {
-          title: "Write Blog",
-          url: "/dashboard/write-blog",
-        },
-        {
-          title: "Analytics",
-          url: "/dashboard/analytics",
-        },
-      ],
-    },
+import { adminRoutes } from "@/routes/admin.routes"
+import { userRoutes } from "@/routes/user.routes"
+import { Route } from "@/types"
 
 
-    {
-      title: "Community",
-      url: "#",
-      items: [
-        {
-          title: "Contribution Guide",
-          url: "#",
-        },
-      ],
-    },
-  ],
-}
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({ user, ...props }: { user: { role: string } } & React.ComponentProps<typeof Sidebar>) {
+
+  let routes: Route[] = []
+
+  switch (user.role) {
+    case 'admin':
+      routes = adminRoutes;
+      break;
+
+    case 'user':
+      routes = userRoutes;
+      break;
+
+    default:
+      routes = [];
+      break;
+  }
+
   return (
     <Sidebar {...props}>
       <SidebarHeader>
@@ -67,7 +57,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
                   <h1 className="font-medium text-lg">Blog App</h1>
-      
+
                 </div>
               </Link>
             </SidebarMenuButton>
@@ -77,19 +67,19 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent className=" flex flex-col">
         <SidebarGroup className="flex-1">
           <SidebarMenu className="flex-1 ">
-            {data.navMain.map((item) => (
+            {routes.map((item) => (
               <SidebarMenuItem key={item.title}>
                 <SidebarMenuButton asChild>
-                  <a href={item.url} className="font-medium">
+                  <Link href={item.url} className="font-medium">
                     {item.title}
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
                 {item.items?.length ? (
                   <SidebarMenuSub>
                     {item.items.map((item) => (
                       <SidebarMenuSubItem key={item.title}>
                         <SidebarMenuSubButton asChild isActive={false}>
-                          <a href={item.url}>{item.title}</a>
+                          <Link href={item.url}>{item.title}</Link>
                         </SidebarMenuSubButton>
                       </SidebarMenuSubItem>
                     ))}

@@ -15,10 +15,25 @@ import {
 } from "@/components/ui/sidebar"
 
 
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+export default function DashboardLayout({
+  children,
+  admin,
+  user
+}: {
+  children: React.ReactNode;
+  admin: React.ReactNode;
+  user: React.ReactNode;
+}) {
+
+
+  const userInfo = {
+    role: 'admin' // Change to 'user' to test user layout
+  }
+
+
   return (
     <SidebarProvider>
-      <AppSidebar />
+      <AppSidebar user={userInfo} />
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 border-b">
           <div className="flex items-center gap-2 px-3">
@@ -40,7 +55,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
-          {children}
+          {userInfo.role === 'admin' ? admin : user}
+
+
         </div>
       </SidebarInset>
     </SidebarProvider>
