@@ -5,22 +5,22 @@ export const env = createEnv({
     server: {
         FRONTEND_BASE_URL: z.url(),
         BACKEND_BASE_URL: z.url(),
-        BACKEND_API: z.url(),
-        AUTH_API: z.url(),
+        API_URL: z.url(),
+        AUTH_URL: z.url(),
     },
 
 
     //client example
-    client:{
-        NEXT_PUBLIC_BACKEND_BASE_URL: z.url(),    
+    client: {
+        NEXT_PUBLIC_BACKEND_BASE_URL: z.url(),
     },
 
 
     runtimeEnv: {
         FRONTEND_BASE_URL: process.env.FRONTEND_BASE_URL,
         BACKEND_BASE_URL: process.env.BACKEND_BASE_URL,
-        BACKEND_API: process.env.BACKEND_API,
-        AUTH_API: process.env.AUTH_API,
+        API_URL: process.env.API_URL,
+        AUTH_URL: process.env.AUTH_URL,
         NEXT_PUBLIC_BACKEND_BASE_URL: process.env.NEXT_PUBLIC_BACKEND_BASE_URL,
     },
 })
