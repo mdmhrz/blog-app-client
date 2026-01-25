@@ -3,8 +3,8 @@ import * as z from "zod"
 
 export const env = createEnv({
     server: {
-        BACKEND_BASE_URL: z.url(),
         FRONTEND_BASE_URL: z.url(),
+        BACKEND_BASE_URL: z.url(),
         BACKEND_API: z.url(),
         AUTH_API: z.url(),
     },
@@ -12,15 +12,15 @@ export const env = createEnv({
 
     //client example
     client:{
-        NEXT_PUBLIC_TEST: z.string()
+        NEXT_PUBLIC_BACKEND_BASE_URL: z.url(),    
     },
 
 
     runtimeEnv: {
-        BACKEND_BASE_URL: process.env.BACKEND_BASE_URL,
         FRONTEND_BASE_URL: process.env.FRONTEND_BASE_URL,
+        BACKEND_BASE_URL: process.env.BACKEND_BASE_URL,
         BACKEND_API: process.env.BACKEND_API,
         AUTH_API: process.env.AUTH_API,
-        NEXT_PUBLIC_TEST: process.env.NEXT_PUBLIC_TEST,
+        NEXT_PUBLIC_BACKEND_BASE_URL: process.env.NEXT_PUBLIC_BACKEND_BASE_URL,
     },
 })
