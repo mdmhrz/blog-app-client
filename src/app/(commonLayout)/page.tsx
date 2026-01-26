@@ -12,10 +12,10 @@ const Home = async () => {
             isFeatured: false,
             search: ''
         },
-        {
-            cache: 'no-store',
-            // revalidate: 10,
-        }
+        // {
+        //     cache: 'no-store',
+        //     // revalidate: 10,
+        // }
     );
     console.log("Blog posts data:", data);
 

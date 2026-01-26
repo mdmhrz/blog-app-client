@@ -27,7 +27,7 @@ export const blogService = {
             const url = new URL(`${API_URL}/post`);  // ← Fixed
 
             if (params) {
-                Object.entries(params).forEach(([key, value]) => {  // ← Fixed: Key → key
+                Object.entries(params).forEach(([key, value]) => {
                     if (value !== undefined && value !== null && value !== '') {
                         url.searchParams.append(key, String(value));
                     }
@@ -47,11 +47,8 @@ export const blogService = {
             const data = await res.json();
             return { data: data, error: null };
         } catch (error) {
-            console.error('Error fetching blog posts:', error);
-            return {
-                data: { data: [], total: 0 },
-                error: { message: 'Error fetching blog posts' }
-            };
+            // console.error('Error fetching blog post:', error);
+            return { data: null, error: { message: "Blog post fetch error" } };
         }
     },
 
@@ -61,7 +58,7 @@ export const blogService = {
             const data = await res.json();
             return { data: data as BlogDetails, error: null };
         } catch (error) {
-            console.error('Error fetching blog post by ID:', error);
+            // console.error('Error fetching blog post by ID:', error);
             return { data: null, error: { message: 'Error fetching blog post by ID' } };
         }
     }
