@@ -1,21 +1,24 @@
 import { BlogCard } from '@/components/modules/homepage/BlogCard';
 import { blogService } from '@/services/blog.service';
 import { BlogPost } from '@/types';
+import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 import React from 'react';
 
 const Home = async () => {
 
-    const { data, error } = await blogService.getBlogPosts();
+    const { data, error } = await blogService.getBlogPosts(
+        {
+            isFeatured: false,
+            search: ''
+        },
+        {
+            cache: 'no-store',
+            // revalidate: 10,
+        }
+    );
     console.log("Blog posts data:", data);
 
-    if (error || !data) {
-        return (
-            <div className='container mx-auto px-4 py-8'>
-                <p className="text-red-500">Failed to load blog posts. Please try again later.</p>
-            </div>
-        );
-    }
 
     const allPost = data.data;
 
