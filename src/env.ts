@@ -13,6 +13,7 @@ export const env = createEnv({
     //client example
     client: {
         NEXT_PUBLIC_BACKEND_BASE_URL: z.url(),
+        NEXT_PUBLIC_FRONTEND_BASE_URL: z.url(),
     },
 
 
@@ -22,5 +23,6 @@ export const env = createEnv({
         API_URL: process.env.API_URL,
         AUTH_URL: process.env.AUTH_URL,
         NEXT_PUBLIC_BACKEND_BASE_URL: process.env.NEXT_PUBLIC_BACKEND_BASE_URL,
+        NEXT_PUBLIC_FRONTEND_BASE_URL: process.env.NEXT_PUBLIC_FRONTEND_BASE_URL
     },
 })
