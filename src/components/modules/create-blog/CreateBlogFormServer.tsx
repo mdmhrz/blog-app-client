@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { env } from "@/env";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { toast } from "sonner";
 
 
 const API_URL = env.API_URL
@@ -24,8 +25,6 @@ export default function CreateBlogFormServer() {
             tags: tags.split(",").map(item => item.trim()).filter(item => item !== "")
         }
 
-        // console.log(JSON.stringify(blogData));
-
         const cookieStore = await cookies()
 
         const res = await fetch(`${API_URL}/post`, {
@@ -35,16 +34,13 @@ export default function CreateBlogFormServer() {
                 Cookie: cookieStore.toString()
             },
             body: JSON.stringify(blogData)
-
         })
 
-        console.log(res)
-
-        // if (res.status === 201) {
-        //     redirect("/dashboard?create-blog?success")
-        // }
-
-
+        if (res.status === 201) {
+            redirect("/dashboard?success=blog-created")
+        } else {
+            redirect("/dashboard?error=blog-creation-failed")
+        }
     }
 
     return (
