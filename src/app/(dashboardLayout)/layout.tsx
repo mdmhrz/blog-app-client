@@ -13,9 +13,11 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import { Roles } from "@/constants/roles";
+import { userService } from "@/services/user.service";
 
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children,
   admin,
   user
@@ -26,9 +28,11 @@ export default function DashboardLayout({
 }) {
 
 
-  const userInfo = {
-    role: 'admin' // Change to 'user' to test user layout
-  }
+  const {data} = await userService.getSession();
+
+  const userInfo = data?.user;
+
+  
 
 
   return (
@@ -39,24 +43,16 @@ export default function DashboardLayout({
           <div className="flex items-center gap-2 px-3">
             <SidebarTrigger />
             <Separator orientation="vertical" className="mr-2 h-4" />
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="#">
-                    Building Your Application
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator className="hidden md:block" />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
+            <div className="flex items-center gap-2">
+              <p className="text-sm font-medium">Dashboard</p>
+            </div>
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
-          {admin}
-          {user}
+          {/* {admin}
+          {user} */}
+
+          {userInfo?.role === Roles.admin ? admin : user}
 
 
 

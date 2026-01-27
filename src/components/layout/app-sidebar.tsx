@@ -23,6 +23,7 @@ import Link from "next/link"
 import { adminRoutes } from "@/routes/admin.routes"
 import { userRoutes } from "@/routes/user.routes"
 import { Route } from "@/types"
+import { Roles } from "@/constants/roles"
 
 
 
@@ -30,12 +31,14 @@ export function AppSidebar({ user, ...props }: { user: { role: string } } & Reac
 
   let routes: Route[] = []
 
+  console.log(user.role ,'user role')
+
   switch (user.role) {
-    case 'admin':
+    case Roles.admin:
       routes = adminRoutes;
       break;
 
-    case 'user':
+    case Roles.user:
       routes = userRoutes;
       break;
 
