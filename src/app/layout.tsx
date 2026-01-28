@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import { Toaster } from "@/components/ui/sonner";
 import { ToastHandler } from "@/components/global/ToastHander";
+import { Suspense } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,7 +41,9 @@ export default function RootLayout({
 
           {children}
           <Toaster richColors position="top-right" />
-          <ToastHandler />
+          <Suspense>
+            <ToastHandler />
+          </Suspense>
         </ThemeProvider>
       </body>
     </html>

@@ -8,9 +8,9 @@ export interface BlogPost {
   tags: string[]
   views?: number
   authorId?: string
-  createdAt?: string
+  createdAt?: string | null
   updatedAt?: string
   _count?: {
     comments: number
-  }
+  } | null
 }

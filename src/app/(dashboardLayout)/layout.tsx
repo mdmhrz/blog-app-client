@@ -52,7 +52,7 @@ export default async function DashboardLayout({
           {/* {admin}
           {user} */}
 
-          {userInfo?.role === Roles.admin ? admin : user}
+          {userInfo && userInfo.role === Roles.admin ? admin : user}
 
 
 

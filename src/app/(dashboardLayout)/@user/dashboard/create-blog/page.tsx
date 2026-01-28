@@ -3,6 +3,8 @@ import CreateBlogFormServer from "@/components/modules/create-blog/CreateBlogFor
 import { blogService } from "@/services/blog.service";
 import { BlogPost } from "@/types";
 
+export const dynamic = 'force-dynamic';
+
 export default async function CreateBlogPage() {
 
     const { data } = await blogService.getBlogPosts();

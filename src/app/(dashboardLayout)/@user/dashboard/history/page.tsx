@@ -4,10 +4,12 @@ import { blogService } from '@/services/blog.service';
 import { BlogPost } from '@/types';
 import React from 'react';
 
+export const dynamic = 'force-dynamic';
+
 const HistoryPage = async ({ searchParams }: { searchParams: Promise<{ page: number; limit?: number }> }) => {
 
     const { page, limit = 10 } = await searchParams;
-    console.log(page)
+    // console.log(page)
 
 
     const response = await blogService.getBlogPosts({ page, limit });
@@ -23,7 +25,7 @@ const HistoryPage = async ({ searchParams }: { searchParams: Promise<{ page: num
 
     const pagination = response?.data?.pagination || fallbackPaginationValue
 
-    console.log(pagination);
+    // console.log(pagination);
 
 
 

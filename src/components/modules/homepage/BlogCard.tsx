@@ -82,13 +82,13 @@ export function BlogCard({ post }: { post: BlogPost }) {
             {/* Views */}
             <div className="flex items-center gap-1.5">
               <Eye className="h-4 w-4" />
-              <span>{post.views}</span>
+              <span>{post.views || 0}</span>
             </div>
 
             {/* Comments */}
             <div className="flex items-center gap-1.5">
               <MessageSquare className="h-4 w-4" />
-              <span>{post._count.comments}</span>
+              <span>{post._count?.comments || 0}</span>
             </div>
           </div>
 
@@ -96,7 +96,7 @@ export function BlogCard({ post }: { post: BlogPost }) {
           <div className="flex items-center gap-1.5">
             <Calendar className="h-4 w-4" />
             <span className="text-xs">
-              {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}
+              {formatDistanceToNow(new Date(post?.createdAt || ""), { addSuffix: true })}
             </span>
           </div>
         </CardFooter>
