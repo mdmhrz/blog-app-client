@@ -4,6 +4,7 @@ import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { env } from "@/env";
+import { revalidateTag, updateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { toast } from "sonner";
@@ -36,11 +37,19 @@ export default function CreateBlogFormServer() {
             body: JSON.stringify(blogData)
         })
 
-        if (res.status === 201) {
-            redirect("/dashboard?success=blog-created")
-        } else {
-            redirect("/dashboard?error=blog-creation-failed")
+
+        if(res.ok){
+            // revalidateTag("blogPosts", "max");
+ 
+            // equivalent to revalidateTag("blogPosts")
+            updateTag("blogPosts")
         }
+
+        // if (res.status === 201) {
+        //     redirect("/dashboard?success=blog-created")
+        // } else {
+        //     redirect("/dashboard?error=blog-creation-failed")
+        // }
     }
 
     return (
