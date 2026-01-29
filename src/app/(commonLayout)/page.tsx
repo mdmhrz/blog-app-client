@@ -22,13 +22,12 @@ const Home = async () => {
     // const { data, error } = await blogService.getBlogPosts({ isFeatured: true });
 
     const featuredPostsPromise = blogService.getBlogPosts({ isFeatured: true });
-    const allPostsPromise = blogService.getBlogPosts(
-        { limit: 10 },
-        { revalidate: 10 }
-    );
+    const allPostsPromise = blogService.getBlogPosts();
 
 
     const [featuredPost, allPosts] = await Promise.all([featuredPostsPromise, allPostsPromise]);
+    console.log(featuredPost);
+    console.log(allPosts);
 
 
 
@@ -57,7 +56,7 @@ const Home = async () => {
 
             {/* All posts */}
 
-            {allPosts?.data?.data && featuredPost.data.data.length > 0 &&
+            {allPosts?.data?.data && allPosts.data.data.length > 0 &&
                 <div>
                     <h2 className='text-2xl font-bold mb-4'>All Posts</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
