@@ -28,19 +28,7 @@ const Home = async () => {
     );
 
 
-
-
-
     const [featuredPost, allPosts] = await Promise.all([featuredPostsPromise, allPostsPromise]);
-
-
-
-
-
-
-
-
-
 
 
 
@@ -50,7 +38,6 @@ const Home = async () => {
             <div>
                 <Banner></Banner>
             </div>
-
 
 
             {/* Featured Posts */}
