@@ -38,11 +38,15 @@ export interface BlogDetailsResponse {
 
 // Generate static params
 export async function generateStaticParams() {
-    const { data } = await blogService.getBlogPosts();
-
-    return data?.data.map((post: BlogPost) => ({ id: post.id })).splice(0, 3)
+    try {
+        const { data } = await blogService.getBlogPosts();
+        if (!data?.data) return []; // fallback
+        return data.data.map((post: BlogPost) => ({ id: post.id })).splice(0, 3);
+    } catch (error) {
+        console.error('Failed to fetch blog posts:', error);
+        return [];
+    }
 }
-
 // to control dynamic pages turn of on SSG
 // export const dynamicParams = false;
 
