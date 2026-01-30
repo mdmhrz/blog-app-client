@@ -31,9 +31,9 @@ export function AppSidebar({ user, ...props }: { user: { role: string } } & Reac
 
   let routes: Route[] = []
 
-  console.log(user.role ,'user role')
+  // console.log(user.role ,'user role')
 
-  switch (user.role) {
+  switch (user?.role) {
     case Roles.admin:
       routes = adminRoutes;
       break;
